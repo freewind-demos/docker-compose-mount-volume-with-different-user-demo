@@ -4,3 +4,4 @@ services:
     build: .
     volumes:
     - ./data:/data
+    command: bash -c "chown -R freewind:freewind /data && ls -al /data"

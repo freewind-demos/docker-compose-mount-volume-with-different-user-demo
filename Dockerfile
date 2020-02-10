@@ -1,12 +1,10 @@
 FROM ubuntu:18.04
 
+RUN mkdir /data
+RUN mkdir /data/xxx
+
 RUN useradd -ms /bin/bash freewind
 
-#RUN whoami
+#VOLUME /data
 
-#RUN mkdir /data
-VOLUME /data
-
-RUN chown -R freewind:freewind /data
-
-CMD ["sh", "-c", "ls -al /data"]
+CMD ["sh", "-c", "whoami && ls -al /data"]
