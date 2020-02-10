@@ -1,5 +1,12 @@
-FROM cosmintitei/bash-curl
+FROM ubuntu:18.04
 
-COPY ./test.sh ./test.sh
+RUN useradd -ms /bin/bash freewind
 
-ENTRYPOINT ["./test.sh"]
+#RUN whoami
+
+#RUN mkdir /data
+VOLUME /data
+
+RUN chown -R freewind:freewind /data
+
+CMD ["sh", "-c", "ls -al /data"]

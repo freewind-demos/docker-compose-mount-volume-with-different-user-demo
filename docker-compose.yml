@@ -1,15 +1,6 @@
 version: '3'
 services:
-  httpbin:
-    image: kennethreitz/httpbin
-    ports:
-      - "20080:80"
-  nginx:
-    image: nginx:latest
-    ports:
-      - "20081:80"
   local:
     build: .
-    depends_on:
-      - httpbin
-      - nginx
+    volumes:
+    - ./data:/data

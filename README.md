@@ -1,27 +1,12 @@
-Docker Compose Demo
+Docker Compose Mount Volume with Different User Demo
 ===================
 
-docker-compose可以让同时管理（比如启动、停止）多个docker containers，非常方便。
+有时候需要让docker container里的文件有一个不同的owner，以便里面的服务使用不同的username执行（比如apache/mysql等）
+
+但是在宿主机上文件的用户名很可能不是docker container里需要的，docker也没有提供一种方式让我们在mount volume的时候指定用户名。
+
+我们需要在Dockerfile里增加一条`chown`命令修改owner，比较好的地方在于，它只对docker container有效，并不会修改宿主机上的owner。
 
 ```
 docker-compose up
 ```
-
-注意：
-1. 修改Dockerfile后不能直接生效，需要运行：
-    ```
-    docker-compose down
-    docker-compose build
-    docker-compose up
-    ```
-2. `docker-compose up -d`可以后台运行
-3. 使用的image可能不支持`bash/curl`，或者`bash`的路径不是`test.sh`中指定的路径，需要确认
-4. 在docker container中使用`host.docker.internal`指向host
-5. `docker-compose.yml`使用`depends_on`来指定启动顺序
-6. `Dockerfile`中copy了文件进去后，会手动继承外界的权限。如果需要不同的权限，需要用`RUN`要手动改变
-
-
-References
-----------
-
-- https://yeasy.gitbooks.io/docker_practice/compose/introduction.html
